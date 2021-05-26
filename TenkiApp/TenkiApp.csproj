@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+	<UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="1-10712-128.png" />
+    <None Remove="127.png" />
+    <None Remove="128.png" />
+    <None Remove="47715-blue-light-fantasy-computer-crescent-file.png" />
+    <None Remove="refresh.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.32" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.113.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="1-10712-128.png" />
+    <Resource Include="127.png" />
+    <Resource Include="128.png" />
+    <Resource Include="47715-blue-light-fantasy-computer-crescent-file.png" />
+    <Resource Include="refresh.png" />
+  </ItemGroup>
+
+</Project>
