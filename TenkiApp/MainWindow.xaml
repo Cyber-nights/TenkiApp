@@ -24,6 +24,7 @@
                 <ComboBox x:Name="cb1" HorizontalAlignment="Left" Margin="519,121,0,0" VerticalAlignment="Top" Width="231" SelectionChanged="cb1_SelectionChanged"/>
                 <ComboBox x:Name="cb2" HorizontalAlignment="Left" Margin="519,153,0,0" VerticalAlignment="Top" Width="231" SelectionChanged="cb2_SelectionChanged"/>
                 <ComboBox x:Name="cb3" HorizontalAlignment="Left" Margin="519,183,0,0" VerticalAlignment="Top" Width="231" SelectionChanged="cb3_SelectionChanged"/>
+                <Button x:Name="addbd" Content="Заполнить БД" HorizontalAlignment="Left" Margin="327,291,0,0" VerticalAlignment="Top" Height="38" Width="104" Click="addbd_Click"/>
             </Grid>
         </TabItem>
         <TabItem Header="Настройки" Background="{x:Null}">
@@ -36,8 +37,9 @@
         <TabItem Header="Тест">
             <Grid>
                 <ListBox x:Name="lbtest" Margin="314,10,314,160"/>
-                <TextBox x:Name="tbtest" Text="" TextWrapping="Wrap" Height="20" Margin="228,227,228,135" />
-                <Button x:Name="btest" Content="Тест" HorizontalAlignment="Center" Margin="0,263,0,0" VerticalAlignment="Top" Height="28" Width="132"/>
+                <TextBox x:Name="tbtestlink" Text="" TextWrapping="Wrap" Height="20" Margin="228,227,228,135" />
+                <Button x:Name="btest" Content="Тест" HorizontalAlignment="Center" Margin="0,295,0,0" VerticalAlignment="Top" Height="28" Width="132" Click="btest_Click_1"/>
+                <TextBox x:Name="tbtest" Text="" TextWrapping="Wrap" Height="20" Margin="228,252,228,110" />
             </Grid>
         </TabItem>
     </TabControl>
