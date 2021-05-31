@@ -1,2 +1,0 @@
-# TenkiApp
-My first project

@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Shapes;//проверка
 using HtmlAgilityPack;
-using System.IO;
+using System.IO;///шщ
 using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Windows.Media.Animation;
@@ -22,7 +22,9 @@ namespace TenkiApp
 {
     public partial class MainWindow : Window
     {
+        //App.PogodaContext db = new App.PogodaContext();
         static string save = "saveinfo.txt", savedata = "", link = ""; string[] c = new string[70]; int i = 0;
+        int idcountry, idarea, idcity;
         //FileInfo f = new FileInfo(save);
         StreamReader str = new StreamReader(save);
         public MainWindow()
@@ -30,7 +32,19 @@ namespace TenkiApp
             InitializeComponent();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {   
+        {
+            try
+            {
+                cb1.Items.Clear();
+                cb1.Items.Clear();
+                using (var db = new App.PogodaContext())
+                {
+                    var c1 = from element in db.countrys select element.name;
+                    foreach (var countr in c1)
+                    { cb1.Items.Add(countr); }
+                }
+            }
+            catch (Exception exp) { MessageBox.Show(exp.Message + " | Ошибка на этапе запуска, пожалуйста, передайте это разработчику", "Окошко надежды"); }
             try
             {
                 while (!str.EndOfStream)
@@ -48,10 +62,12 @@ namespace TenkiApp
                 cb3.SelectedItem = c[2];
                 link = c[3];
                 Info();
+                /*try
+                {
                 using (SQLiteConnection Connect = new SQLiteConnection("Data Source = MyProject.sqlite;"))
                 {
                     Connect.Open();
-                    SQLiteCommand command = new SQLiteCommand(@"SELECT countryname FROM Pogodas WHERE countryname <> ''", Connect);
+                    SQLiteCommand command = new SQLiteCommand(@"SELECT name FROM countrys", Connect);
                     SQLiteDataReader dann = command.ExecuteReader();
                     while (dann.Read())
                     {
@@ -60,6 +76,9 @@ namespace TenkiApp
                     }
                     Connect.Close();
                 }
+                 }
+                 catch (Exception exp) { MessageBox.Show(exp.Message + " | Ошибка на этапе запуска, пожалуйста, передайте это разработчику", "Окошко надежды"); }
+            */
                 if (cb1.Text != "")
                     cb2.Visibility = Visibility.Visible;
                 if (cb2.Text == "")
@@ -67,20 +86,40 @@ namespace TenkiApp
                 if (cb3.Text == "")
                     cb3.Visibility = Visibility.Hidden;
             }
-            catch (Exception) { MessageBox.Show("Ошибка на этапе запуска, пожалуйста, передайте это разработчику", "Окошко надежды"); }
+            catch (Exception exp) { MessageBox.Show(exp.Message + " | Ошибка на этапе запуска, пожалуйста, передайте это разработчику", "Окошко надежды"); }
         }
+
         private void cb1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
-                cb2.Items.Clear(); cb3.Items.Clear();
+                cb2.Items.Clear();
                 cb2.Visibility = Visibility.Visible;
                 cb3.Visibility = Visibility.Hidden;
+                using (var db = new App.PogodaContext())
+                {
+                    var area = from element in db.areas where element.id_country == (cb1.SelectedIndex + 1)select element.name;
+                    foreach (var ar in area)
+                    { cb2.Items.Add(ar); }
+                    //var idc = db.countrys.Where(x => x.name == cb1.Text);
+                }
+            }
+            catch (Exception) { MessageBox.Show("Ошибка на первом этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }
+            
+
+            //
+            
+            try
+            {
+                /*cb2.Items.Clear(); cb3.Items.Clear();
+                cb2.Visibility = Visibility.Visible;
+                cb3.Visibility = Visibility.Hidden;*/
                 //
-                using (SQLiteConnection Connect = new SQLiteConnection("Data Source = MyProject.sqlite;"))
+
+                /*using (SQLiteConnection Connect = new SQLiteConnection("Data Source = MyProject.sqlite;"))
                 {
                     Connect.Open();
-                    SQLiteCommand command = new SQLiteCommand(@"SELECT areaname FROM Pogodas WHERE countryid ='" + (cb1.SelectedIndex + 1).ToString() + "' AND areaname <> '';", Connect);
+                    SQLiteCommand command = new SQLiteCommand(@"SELECT name FROM areas WHERE id_country ='" + (cb1.SelectedIndex + 1).ToString() + "';", Connect);
                     SQLiteDataReader dann = command.ExecuteReader();
                     while (dann.Read())
                     {
@@ -88,24 +127,46 @@ namespace TenkiApp
                         cb2.Items.Add(d);
                     }
                     Connect.Close();
-                }
+                }*/ 
             }
-            catch (Exception) { MessageBox.Show("Ошибка на первом этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }
+            catch (Exception) { MessageBox.Show("Ошибка на первом этапе, пожалуйста, передайте это разработчику", "Окошко надежды");}
         }
         private void cb2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
                 cb3.Items.Clear();
+                using(var db = new App.PogodaContext())
+                {
+                    var area = db.areas.Where(x=> x.name == cb2.SelectedItem && x.id_country==cb1.SelectedIndex+1);
+                    foreach (var ci in area)
+                    {
+                        link = ci.link;
+                        idarea = ci.id;
+                    }
+                    var city = db.citys.Where(x => x.id_area == idarea);
+                    if(city.Count() != 0)
+                    foreach(var cit in city)
+                    { cb3.Items.Add(cit.name); cb3.Visibility = Visibility.Visible; } else Info();
+                }
+            }
+            catch (Exception у) { MessageBox.Show(у.Message+"Ошибка на втором этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }
+            
+
+            //
+
+            /*try
+            {
+                cb3.Items.Clear();
                 using (SQLiteConnection Connect = new SQLiteConnection("Data Source = MyProject.sqlite;"))
                 {
                     Connect.Open();
                     //SELECT arealink FROM Pogodas WHERE countryid = '154' AND areaname <> '';
-                    SQLiteCommand command = new SQLiteCommand(@"SELECT cityname FROM Pogodas WHERE countryid ='" + (cb1.SelectedIndex + 1).ToString() + "' AND areaid = '" + (cb2.SelectedIndex + 1).ToString() + "' AND cityname <> ''", Connect);
-                    SQLiteCommand commandlink = new SQLiteCommand(@"SELECT arealink FROM Pogodas WHERE countryid ='" + (cb1.SelectedIndex + 1).ToString() + "' AND areaid = '" + (cb2.SelectedIndex + 1).ToString() + "' AND arealink <> ''", Connect);
-                    SQLiteDataReader dannlink = commandlink.ExecuteReader();
-                    SQLiteDataReader dann = command.ExecuteReader();
-                    while (dann.Read())
+                    /*SQLiteCommand command = new SQLiteCommand(@"SELECT name FROM areas WHERE id_country ='" + (cb1.SelectedIndex + 1).ToString() + "' AND id = '" + (cb2.SelectedIndex + 1).ToString() + ";", Connect);
+                    SQLiteCommand commandlink = new SQLiteCommand(@"SELECT link FROM areas WHERE id_country ='" + (cb1.SelectedIndex + 1).ToString() + "' AND id = '" + (cb2.SelectedIndex + 1).ToString() + ";", Connect);
+                   SQLiteDataReader dannlink = commandlink.ExecuteReader();
+                    SQLiteDataReader dann = command.ExecuteReader();*/ 
+                    /*while (dann.Read())
                     {
                         object d = dann[0];
                         cb3.Items.Add(d);
@@ -120,11 +181,26 @@ namespace TenkiApp
                 if (cb3.Items.Count != 0) cb3.Visibility = Visibility.Visible;
                 Info();
             }
-            catch (Exception) { MessageBox.Show("Ошибка на втором этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }
+            catch (Exception) { MessageBox.Show("Ошибка на втором этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }*/
         }
         private void cb3_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
+            {
+                using (var db = new App.PogodaContext())
+                {
+                    var city = db.citys.Where(x => x.name == cb3.SelectedItem);
+                    foreach(var cit in city)
+                    {link = cit.link;}
+                    if (city.Count() != 0) Info();
+                }
+            }
+            catch (Exception) { MessageBox.Show("Ошибка на третьем этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }
+            
+
+            //
+            
+            /*try
             {
                 using (SQLiteConnection Connect = new SQLiteConnection("Data Source = MyProject.sqlite;"))
                 {
@@ -141,6 +217,7 @@ namespace TenkiApp
                 Info();
             }
             catch (Exception) { MessageBox.Show("Ошибка на третьем этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }
+        */
         }
         private void b3_Click(object sender, RoutedEventArgs e)//проверка данных
         {
@@ -196,15 +273,16 @@ namespace TenkiApp
 
         private void btest_Click_1(object sender, RoutedEventArgs e)
         {
+            lbtest.Items.Clear();
             try
             {
                 HtmlWeb webinfo = new HtmlWeb();
-                HtmlAgilityPack.HtmlDocument docwebinfo = webinfo.Load(link);
+                HtmlAgilityPack.HtmlDocument docwebinfo = webinfo.Load("https://yandex.ru/pogoda/region?via=brd");
                 HtmlNode[] pressure = docwebinfo.DocumentNode.SelectNodes(tbtest.Text).ToArray();
                 foreach (HtmlNode p in pressure)
                 { lbtest.Items.Add(p.InnerText); }
             }
-            catch (Exception) { MessageBox.Show("Ошибка", "Не получилось"); }
+            catch (Exception exp) { MessageBox.Show("Ошибка" + exp.Message, "Не получилось"); }
         }
 
         /*private void Window_Deactivated(object sender, EventArgs e)
@@ -237,33 +315,94 @@ namespace TenkiApp
             e.Cancel = true;
             WindowState = WindowState.Minimized;
         }
+
+        private void addbd_Click(object sender, RoutedEventArgs e)
+        {
+            adddatabase();
+        }
+
         public void Info()
         {
+            i = 0;
             try
             {
-                i = 0;
+                HtmlWeb webinfo = new HtmlWeb();
+                HtmlAgilityPack.HtmlDocument docwebinfo = webinfo.Load(link);
+                HtmlNode[] temperature;
+                temperature = docwebinfo.DocumentNode.SelectNodes("//div [@class='fact__temp-wrap'] //span[@class='temp__value temp__value_with-unit']").ToArray();
+                foreach (HtmlNode t in temperature)
+                { l1.Content = "Текущая температура " + t.InnerText; i = 0; break; }
                 try
                 {
-                    HtmlWeb webinfo = new HtmlWeb();
-                    HtmlAgilityPack.HtmlDocument docwebinfo = webinfo.Load(link);
-                    HtmlNode[] temperature;
-                    temperature = docwebinfo.DocumentNode.SelectNodes("//div [@class='fact__temp-wrap'] //span[@class='temp__value temp__value_with-unit']").ToArray();
-                    foreach (HtmlNode t in temperature)
-                    { l1.Content = "Текущая температура " + t.InnerText; i = 0; break; }
                     HtmlNode[] wind = docwebinfo.DocumentNode.SelectNodes("//div[@class='term__value'] //span [@class='wind-speed']").ToArray();
                     foreach (HtmlNode w in wind)
                     { l2.Content = "Скорость ветра " + w.InnerText + " м/с"; break; }
-                    HtmlNode[] pressure = docwebinfo.DocumentNode.SelectNodes("//div [@class='term__value']").ToArray();
-                    foreach (HtmlNode p in pressure)
-                    { i++; if (i == 5) { l3.Content = p.InnerText; i = 0; break; } }
-                    HtmlNode[] humidity = docwebinfo.DocumentNode.SelectNodes("//div [@class='term__value']").ToArray();
-                    foreach (HtmlNode h in humidity)
-                    { i++; if (i == 4) { l4.Content = "Влажность " + h.InnerText; i = 0; break; } }
-                    // температура днем //div[@class='temp forecast-briefly__temp forecast-briefly__temp_day']
                 }
-                catch { l1.Content = "Ошибка"; l2.Content = "Ошибка"; }
+                catch (ArgumentNullException) { l2.Content = "Штиль"; };
+                HtmlNode[] pressure = docwebinfo.DocumentNode.SelectNodes("//div [@class='term__value']").ToArray();
+                foreach (HtmlNode p in pressure)
+                { i++; if (i == 5) { l3.Content = p.InnerText; i = 0; break; } }
+                HtmlNode[] humidity = docwebinfo.DocumentNode.SelectNodes("//div [@class='term__value']").ToArray();
+                foreach (HtmlNode h in humidity)
+                { i++; if (i == 4) { l4.Content = "Влажность " + h.InnerText; i = 0; break; } }
+                // температура днем //div[@class='temp forecast-briefly__temp forecast-briefly__temp_day']
             }
-            catch (Exception) { MessageBox.Show("Данные не получены", "Окошко надежды"); }
+            catch (Exception exp)
+            {
+                l1.Content = "Данные не получены";
+                l2.Content = "Данные не получены";
+                l3.Content = "Данные не получены";
+                l4.Content = "Данные не получены";
+            }
+        }
+        public async void adddatabase()
+        {
+            try
+            {
+                bool citys = true;
+                int i = 0, j = 0, g = 0;
+                string com = "https://yandex.ru/pogoda/region?via=brd";
+                string tegcountryarea = "//li[@class='place-list__item place-list__item_region_yes']//a";
+                //string tegcountryarea = "//span[@itemprop='name']";
+                ////li[@class='place-list__item place-list__item_region_yes']
+                App.PogodaContext db = new App.PogodaContext();
+                db.Database.EnsureDeleted();
+                db.Database.EnsureCreated();
+                HtmlWeb webcountry = new HtmlWeb();
+                HtmlAgilityPack.HtmlDocument doccountry = webcountry.Load(com);
+                HtmlNode[] nodescountry = doccountry.DocumentNode.SelectNodes(tegcountryarea).ToArray();
+                foreach (HtmlNode itemcountry in nodescountry)
+                {
+                    await db.countrys.AddRangeAsync(new App.Country { id = (i + 1), name = itemcountry.InnerText, link = "https://yandex.ru" + itemcountry.GetAttributeValue("href", "") });
+                    await db.SaveChangesAsync();
+                    HtmlAgilityPack.HtmlDocument docarea = new HtmlWeb().Load("https://yandex.ru" + itemcountry.GetAttributeValue("href", ""));//получение ссылки
+                    HtmlNode[] nodesarea = docarea.DocumentNode.SelectNodes(tegcountryarea).ToArray();
+                    foreach (HtmlNode item in nodesarea)
+                    {
+                        await db.areas.AddRangeAsync(new App.Area { id = (j + 1), name = item.InnerText, link = "https://yandex.ru" + item.GetAttributeValue("href", ""), id_country = (i + 1) });
+                        await db.SaveChangesAsync();
+                        HtmlNode[] nodescity = null;
+                        if (citys == true)
+                        {
+                            try
+                            {
+                                HtmlAgilityPack.HtmlDocument doccity = new HtmlWeb().Load("https://yandex.ru" + item.GetAttributeValue("href", ""));
+                                nodescity = doccity.DocumentNode.SelectNodes(tegcountryarea).ToArray();
+                                foreach (HtmlNode city in nodescity)
+                                {
+                                    await db.citys.AddRangeAsync(new App.City { id_area = (j + 1), id = (g + 1), name = city.InnerText, link = "https://yandex.ru" + city.GetAttributeValue("href", "") });
+                                    await db.SaveChangesAsync(); g++;
+                                }
+                            }
+                            catch (ArgumentNullException) { }
+                        }
+                        /*g = 0*/; j++; if (nodescity == null) citys = false;
+                    }
+                    /*j = 0;*/ i++; citys = true;
+
+                }
+            }
+            catch(Exception exp) { MessageBox.Show(exp.Message+"","Информация"); }
         }
     }
 }

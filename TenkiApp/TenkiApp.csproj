@@ -13,11 +13,14 @@
     <None Remove="128.png" />
     <None Remove="47715-blue-light-fantasy-computer-crescent-file.png" />
     <None Remove="refresh.png" />
+    <None Remove="saveinfo.txt" />
+    <None Remove="tenkidb.sqlite" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.32" />
-    <PackageReference Include="System.Data.SQLite" Version="1.0.113.7" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.33" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.6" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.114" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +29,7 @@
     <Resource Include="128.png" />
     <Resource Include="47715-blue-light-fantasy-computer-crescent-file.png" />
     <Resource Include="refresh.png" />
+    <Resource Include="saveinfo.txt" />
   </ItemGroup>
 
 </Project>
