@@ -17,21 +17,28 @@
                         <Image Source="/refresh.png" StretchDirection="Both" Width="22" Height="22" />
                     </StackPanel>
                 </Button>
-                <Label x:Name="l1" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,11,0,0" VerticalAlignment="Top" Width="auto"/>
-                <Label x:Name="l2" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,59,0,0" VerticalAlignment="Top" Width="auto"/>
-                <Label x:Name="l3" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,107,0,0" VerticalAlignment="Top" Width="auto"/>
-                <Label x:Name="l4" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,155,0,0" VerticalAlignment="Top" Width="auto"/>
-                <ComboBox x:Name="cb1" HorizontalAlignment="Left" Margin="519,121,0,0" VerticalAlignment="Top" Width="231" SelectionChanged="cb1_SelectionChanged"/>
-                <ComboBox x:Name="cb2" HorizontalAlignment="Left" Margin="519,153,0,0" VerticalAlignment="Top" Width="231" SelectionChanged="cb2_SelectionChanged"/>
-                <ComboBox x:Name="cb3" HorizontalAlignment="Left" Margin="519,183,0,0" VerticalAlignment="Top" Width="231" SelectionChanged="cb3_SelectionChanged"/>
-                <Button x:Name="addbd" Content="Заполнить БД" HorizontalAlignment="Left" Margin="327,291,0,0" VerticalAlignment="Top" Height="38" Width="104" Click="addbd_Click"/>
+                <ComboBox x:Name="cb1" HorizontalAlignment="Center" Margin="0,13,0,0" VerticalAlignment="Top" Width="231" SelectionChanged="cb1_SelectionChanged"/>
+                <ComboBox x:Name="cb2" HorizontalAlignment="Center" Margin="0,45,0,0" VerticalAlignment="Top" Width="231" SelectionChanged="cb2_SelectionChanged" DropDownClosed="cb2_DropDownClosed"/>
+                <ComboBox x:Name="cb3" HorizontalAlignment="Center" Margin="0,75,0,0" VerticalAlignment="Top" Width="231" SelectionChanged="cb3_SelectionChanged" DropDownClosed="cb3_DropDownClosed"/>
+                <GroupBox Header="Показатели" Margin="10,0,510,52">
+                    <Grid Height="auto" Width="auto" Margin="10,0,9,0">
+                        <Label x:Name="ltitle" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,25,0,0" VerticalAlignment="Top" Width="auto"/>
+                        <Label x:Name="l1" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,75,0,0" VerticalAlignment="Top" Width="auto"/>
+                        <Label x:Name="l2" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,123,0,0" VerticalAlignment="Top" Width="auto"/>
+                        <Label x:Name="l3" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,171,0,0" VerticalAlignment="Top" Width="auto"/>
+                        <Label x:Name="l4" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,219,0,0" VerticalAlignment="Top" Width="auto"/>
+                    </Grid>
+                </GroupBox>
             </Grid>
         </TabItem>
         <TabItem Header="Настройки" Background="{x:Null}">
             <Grid>
+                <Button x:Name="addbd" Content="Заполнить БД" HorizontalAlignment="Left" Margin="96,306,0,0" VerticalAlignment="Top" Height="38" Width="104" Click="addbd_Click"/>
+
                 <Grid.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
                 </Grid.Background>
+
             </Grid>
         </TabItem>
         <TabItem Header="Тест">

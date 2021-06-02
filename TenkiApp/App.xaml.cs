@@ -70,7 +70,6 @@ namespace TenkiApp
             {
                 optionsbuilder.UseSqlite("Data Source=MyProject.sqlite");
             }
-
         }
         public class Country
         {
