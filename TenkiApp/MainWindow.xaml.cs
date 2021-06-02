@@ -29,7 +29,9 @@ namespace TenkiApp
         StreamReader str = new StreamReader(save);
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            addbd.Visibility = Visibility.Hidden;
+
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -62,6 +64,7 @@ namespace TenkiApp
                 cb3.SelectedItem = c[2];
                 link = c[3];
                 Info();
+                title();
                 /*try
                 {
                 using (SQLiteConnection Connect = new SQLiteConnection("Data Source = MyProject.sqlite;"))
@@ -88,7 +91,10 @@ namespace TenkiApp
             }
             catch (Exception exp) { MessageBox.Show(exp.Message + " | Ошибка на этапе запуска, пожалуйста, передайте это разработчику", "Окошко надежды"); }
         }
-
+        void title()
+        {
+            ltitle.Content = (cb3.Items.Count != 0) ? cb3.Text : cb2.Text;
+        }
         private void cb1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -283,6 +289,16 @@ namespace TenkiApp
                 { lbtest.Items.Add(p.InnerText); }
             }
             catch (Exception exp) { MessageBox.Show("Ошибка" + exp.Message, "Не получилось"); }
+        }
+
+        private void cb2_DropDownClosed(object sender, EventArgs e)
+        {
+            title();
+        }
+
+        private void cb3_DropDownClosed(object sender, EventArgs e)
+        {
+            title();
         }
 
         /*private void Window_Deactivated(object sender, EventArgs e)
