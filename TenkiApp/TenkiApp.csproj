@@ -12,9 +12,17 @@
     <None Remove="127.png" />
     <None Remove="128.png" />
     <None Remove="47715-blue-light-fantasy-computer-crescent-file.png" />
+    <None Remove="MyProject.sqlite" />
+    <None Remove="refresh.ico" />
     <None Remove="refresh.png" />
     <None Remove="saveinfo.txt" />
     <None Remove="tenkidb.sqlite" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="refresh.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -28,8 +36,15 @@
     <Resource Include="127.png" />
     <Resource Include="128.png" />
     <Resource Include="47715-blue-light-fantasy-computer-crescent-file.png" />
-    <Resource Include="refresh.png" />
-    <Resource Include="saveinfo.txt" />
+    <EmbeddedResource Include="MyProject.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="refresh.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="saveinfo.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

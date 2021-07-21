@@ -14,8 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;//проверка
 using HtmlAgilityPack;
 using System.IO;///шщ
-using System.Data.SqlClient;
-using System.Data.SQLite;
 using System.Windows.Media.Animation;
 
 namespace TenkiApp
@@ -35,7 +33,6 @@ namespace TenkiApp
         {
             try
             {
-                cb1.Items.Clear();
                 cb1.Items.Clear();
                 using (var db = new App.PogodaContext())
                 {
@@ -62,23 +59,6 @@ namespace TenkiApp
                 cb3.SelectedItem = c[2];
                 link = c[3];
                 Info();
-                /*try
-                {
-                using (SQLiteConnection Connect = new SQLiteConnection("Data Source = MyProject.sqlite;"))
-                {
-                    Connect.Open();
-                    SQLiteCommand command = new SQLiteCommand(@"SELECT name FROM countrys", Connect);
-                    SQLiteDataReader dann = command.ExecuteReader();
-                    while (dann.Read())
-                    {
-                        object d = dann[0];
-                        cb1.Items.Add(d);
-                    }
-                    Connect.Close();
-                }
-                 }
-                 catch (Exception exp) { MessageBox.Show(exp.Message + " | Ошибка на этапе запуска, пожалуйста, передайте это разработчику", "Окошко надежды"); }
-            */
                 if (cb1.Text != "")
                     cb2.Visibility = Visibility.Visible;
                 if (cb2.Text == "")
@@ -98,90 +78,34 @@ namespace TenkiApp
                 cb3.Visibility = Visibility.Hidden;
                 using (var db = new App.PogodaContext())
                 {
-                    var area = from element in db.areas where element.id_country == (cb1.SelectedIndex + 1)select element.name;
+                    var area = from element in db.areas where element.id_country == (cb1.SelectedIndex + 1) select element.name;
                     foreach (var ar in area)
                     { cb2.Items.Add(ar); }
-                    //var idc = db.countrys.Where(x => x.name == cb1.Text);
                 }
             }
             catch (Exception) { MessageBox.Show("Ошибка на первом этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }
-            
-
-            //
-            
-            try
-            {
-                /*cb2.Items.Clear(); cb3.Items.Clear();
-                cb2.Visibility = Visibility.Visible;
-                cb3.Visibility = Visibility.Hidden;*/
-                //
-
-                /*using (SQLiteConnection Connect = new SQLiteConnection("Data Source = MyProject.sqlite;"))
-                {
-                    Connect.Open();
-                    SQLiteCommand command = new SQLiteCommand(@"SELECT name FROM areas WHERE id_country ='" + (cb1.SelectedIndex + 1).ToString() + "';", Connect);
-                    SQLiteDataReader dann = command.ExecuteReader();
-                    while (dann.Read())
-                    {
-                        object d = dann[0];
-                        cb2.Items.Add(d);
-                    }
-                    Connect.Close();
-                }*/ 
-            }
-            catch (Exception) { MessageBox.Show("Ошибка на первом этапе, пожалуйста, передайте это разработчику", "Окошко надежды");}
         }
         private void cb2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
                 cb3.Items.Clear();
-                using(var db = new App.PogodaContext())
+                using (var db = new App.PogodaContext())
                 {
-                    var area = db.areas.Where(x=> x.name == cb2.SelectedItem && x.id_country==cb1.SelectedIndex+1);
+                    var area = db.areas.Where(x => x.name == cb2.SelectedItem && x.id_country == cb1.SelectedIndex + 1);
                     foreach (var ci in area)
                     {
                         link = ci.link;
                         idarea = ci.id;
                     }
                     var city = db.citys.Where(x => x.id_area == idarea);
-                    if(city.Count() != 0)
-                    foreach(var cit in city)
-                    { cb3.Items.Add(cit.name); cb3.Visibility = Visibility.Visible; } else Info();
+                    if (city.Count() != 0)
+                        foreach (var cit in city)
+                        { cb3.Items.Add(cit.name); cb3.Visibility = Visibility.Visible; }
+                    else Info();
                 }
             }
-            catch (Exception у) { MessageBox.Show(у.Message+"Ошибка на втором этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }
-            
-
-            //
-
-            /*try
-            {
-                cb3.Items.Clear();
-                using (SQLiteConnection Connect = new SQLiteConnection("Data Source = MyProject.sqlite;"))
-                {
-                    Connect.Open();
-                    //SELECT arealink FROM Pogodas WHERE countryid = '154' AND areaname <> '';
-                    /*SQLiteCommand command = new SQLiteCommand(@"SELECT name FROM areas WHERE id_country ='" + (cb1.SelectedIndex + 1).ToString() + "' AND id = '" + (cb2.SelectedIndex + 1).ToString() + ";", Connect);
-                    SQLiteCommand commandlink = new SQLiteCommand(@"SELECT link FROM areas WHERE id_country ='" + (cb1.SelectedIndex + 1).ToString() + "' AND id = '" + (cb2.SelectedIndex + 1).ToString() + ";", Connect);
-                   SQLiteDataReader dannlink = commandlink.ExecuteReader();
-                    SQLiteDataReader dann = command.ExecuteReader();*/ 
-                    /*while (dann.Read())
-                    {
-                        object d = dann[0];
-                        cb3.Items.Add(d);
-                    }
-                    while (dannlink.Read())
-                    {
-                        object dlink = dannlink[0];
-                        if (cb3.Items.Count == 0) link = dlink.ToString();
-                    }
-                    Connect.Close();
-                }
-                if (cb3.Items.Count != 0) cb3.Visibility = Visibility.Visible;
-                Info();
-            }
-            catch (Exception) { MessageBox.Show("Ошибка на втором этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }*/
+            catch (Exception у) { MessageBox.Show(у.Message + "Ошибка на втором этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }
         }
         private void cb3_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -190,34 +114,12 @@ namespace TenkiApp
                 using (var db = new App.PogodaContext())
                 {
                     var city = db.citys.Where(x => x.name == cb3.SelectedItem);
-                    foreach(var cit in city)
-                    {link = cit.link;}
+                    foreach (var cit in city)
+                    { link = cit.link; }
                     if (city.Count() != 0) Info();
                 }
             }
             catch (Exception) { MessageBox.Show("Ошибка на третьем этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }
-            
-
-            //
-            
-            /*try
-            {
-                using (SQLiteConnection Connect = new SQLiteConnection("Data Source = MyProject.sqlite;"))
-                {
-                    Connect.Open();
-                    SQLiteCommand commandlink = new SQLiteCommand(@"SELECT citylink FROM Pogodas WHERE countryid ='" + (cb1.SelectedIndex + 1).ToString() + "' AND areaid = '" + (cb2.SelectedIndex + 1).ToString() + "' AND cityid = '" + (cb3.SelectedIndex + 1).ToString() + "'", Connect);
-                    SQLiteDataReader dannlink = commandlink.ExecuteReader();
-                    while (dannlink.Read())
-                    {
-                        object dlink = dannlink[0];
-                        if (cb3.Items.Count != 0) link = dlink.ToString();
-                    }
-                    Connect.Close();
-                }
-                Info();
-            }
-            catch (Exception) { MessageBox.Show("Ошибка на третьем этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }
-        */
         }
         private void b3_Click(object sender, RoutedEventArgs e)//проверка данных
         {
@@ -318,7 +220,7 @@ namespace TenkiApp
 
         private void addbd_Click(object sender, RoutedEventArgs e)
         {
-            adddatabase();
+            //adddatabase();
         }
 
         public void Info()
@@ -398,11 +300,12 @@ namespace TenkiApp
                         }
                         /*g = 0*/; j++; if (nodescity == null) citys = false;
                     }
-                    /*j = 0;*/ i++; citys = true;
+                    /*j = 0;*/
+                    i++; citys = true;
 
                 }
             }
-            catch(Exception exp) { MessageBox.Show(exp.Message+"","Информация"); }
+            catch (Exception exp) { MessageBox.Show(exp.Message + "", "Информация"); }
         }
     }
 }
