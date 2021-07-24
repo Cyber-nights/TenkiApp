@@ -28,6 +28,11 @@ namespace TenkiApp
         public MainWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.Manual;
+            double height = SystemParameters.FullPrimaryScreenHeight;
+            double width = SystemParameters.FullPrimaryScreenWidth;
+            this.Top = height-window1.Height+20;
+            this.Left = width-window1.Width;
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -185,6 +190,12 @@ namespace TenkiApp
                 { lbtest.Items.Add(p.InnerText); }
             }
             catch (Exception exp) { MessageBox.Show("Ошибка" + exp.Message, "Не получилось"); }
+        }
+
+        private void window1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
 
         /*private void Window_Deactivated(object sender, EventArgs e)

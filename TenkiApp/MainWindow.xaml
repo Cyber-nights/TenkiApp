@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TenkiApp"
         mc:Ignorable="d"
-        Title="Погода" Height="471" Width="816" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="Погода" Height="471" Width="816" Loaded="Window_Loaded" Closing="Window_Closing" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        x:Name="window1" MouseDown="window1_MouseDown">
     <TabControl HorizontalAlignment="Left" Height="410" Margin="10,10,0,0" VerticalAlignment="Top" Width="780">
         <TabItem Header="Погода">
             <Grid>
