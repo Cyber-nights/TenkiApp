@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TenkiApp"
-        mc:Ignorable="d"
-        Title="Погода" Height="471" Width="816" Loaded="Window_Loaded" Closing="Window_Closing" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Погода" mc:Ignorable="d" Height="471" Width="816" Loaded="Window_Loaded" Closing="Window_Closing" WindowStartupLocation="CenterScreen" WindowStyle="None"
         x:Name="window1" MouseDown="window1_MouseDown">
     <TabControl HorizontalAlignment="Left" Height="410" Margin="10,10,0,0" VerticalAlignment="Top" Width="780">
         <TabItem Header="Погода">
@@ -13,9 +13,9 @@
                 <Grid.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
                 </Grid.Background>
-                <Button x:Name="brefresh" HorizontalAlignment="Left" Margin="740,15,0,0" VerticalAlignment="Top" Visibility="Visible" Height="25" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" FlowDirection="RightToLeft" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" Width="25" Click="brefresh_Click">
+                <Button x:Name="brefresh" HorizontalAlignment="Left" Margin="734,17,0,0" VerticalAlignment="Top" Visibility="Visible" Height="25" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" FlowDirection="RightToLeft" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" Width="24" Click="brefresh_Click">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="/refresh.png" StretchDirection="Both" Width="22" Height="22" />
+                        <Image Source="/refresh.png" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 <Label x:Name="l1" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,11,0,0" VerticalAlignment="Top" Width="auto"/>
@@ -25,7 +25,7 @@
                 <ComboBox x:Name="cb1" HorizontalAlignment="Left" Margin="519,121,0,0" VerticalAlignment="Top" Width="231" SelectionChanged="cb1_SelectionChanged"/>
                 <ComboBox x:Name="cb2" HorizontalAlignment="Left" Margin="519,153,0,0" VerticalAlignment="Top" Width="231" SelectionChanged="cb2_SelectionChanged"/>
                 <ComboBox x:Name="cb3" HorizontalAlignment="Left" Margin="519,183,0,0" VerticalAlignment="Top" Width="231" SelectionChanged="cb3_SelectionChanged"/>
-                <Button x:Name="addbd" Content="Заполнить БД" HorizontalAlignment="Left" Margin="327,291,0,0" VerticalAlignment="Top" Height="38" Width="104" Click="addbd_Click"/>
+                <Button x:Name="addbd" Content="Заполнить БД" HorizontalAlignment="Left" Margin="327,291,0,0" VerticalAlignment="Top" Height="38" Width="104" Padding="0" Click="addbd_Click"/>
             </Grid>
         </TabItem>
         <TabItem Header="Настройки" Background="{x:Null}">

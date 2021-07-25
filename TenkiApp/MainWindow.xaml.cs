@@ -23,6 +23,7 @@ namespace TenkiApp
         //App.PogodaContext db = new App.PogodaContext();
         static string save = "saveinfo.txt", savedata = "", link = ""; string[] c = new string[70]; int i = 0;
         int idcountry, idarea, idcity;
+        App.PogodaContext dbcon = new App.PogodaContext();
         //FileInfo f = new FileInfo(save);
         StreamReader str = new StreamReader(save);
         public MainWindow()
@@ -36,7 +37,7 @@ namespace TenkiApp
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            try
+            /*try
             {
                 cb1.Items.Clear();
                 using (var db = new App.PogodaContext())
@@ -46,7 +47,18 @@ namespace TenkiApp
                     { cb1.Items.Add(countr); }
                 }
             }
+            catch (Exception exp) { MessageBox.Show(exp.Message + " | Ошибка на этапе запуска, пожалуйста, передайте это разработчику", "Окошко надежды"); }*/
+            try
+            {
+                cb1.Items.Clear();
+
+                var c1 = from element in dbcon.countrys select element.name;
+                foreach (var countr in c1)
+                { cb1.Items.Add(countr); }
+            }
             catch (Exception exp) { MessageBox.Show(exp.Message + " | Ошибка на этапе запуска, пожалуйста, передайте это разработчику", "Окошко надежды"); }
+
+
             try
             {
                 while (!str.EndOfStream)
@@ -76,7 +88,7 @@ namespace TenkiApp
 
         private void cb1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
+            /*try
             {
                 cb2.Items.Clear();
                 cb2.Visibility = Visibility.Visible;
@@ -88,11 +100,23 @@ namespace TenkiApp
                     { cb2.Items.Add(ar); }
                 }
             }
+            catch (Exception) { MessageBox.Show("Ошибка на первом этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }*/
+
+            try
+            {
+                cb2.Items.Clear();
+                cb2.Visibility = Visibility.Visible;
+                cb3.Visibility = Visibility.Hidden;
+                    var area = from element in dbcon.areas where element.id_country == (cb1.SelectedIndex + 1) select element.name;
+                    foreach (var ar in area)
+                    { cb2.Items.Add(ar); }
+            }
             catch (Exception) { MessageBox.Show("Ошибка на первом этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }
+
         }
         private void cb2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
+            /*try
             {
                 cb3.Items.Clear();
                 using (var db = new App.PogodaContext())
@@ -110,11 +134,30 @@ namespace TenkiApp
                     else Info();
                 }
             }
+            catch (Exception у) { MessageBox.Show(у.Message + "Ошибка на втором этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }*/
+
+            try
+            {
+                cb3.Items.Clear();
+                
+                    var area = dbcon.areas.Where(x => x.name == cb2.SelectedItem && x.id_country == cb1.SelectedIndex + 1);
+                    foreach (var ci in area)
+                    {
+                        link = ci.link;
+                        idarea = ci.id;
+                    }
+                    var city = dbcon.citys.Where(x => x.id_area == idarea);
+                    if (city.Count() != 0)
+                        foreach (var cit in city)
+                        { cb3.Items.Add(cit.name); cb3.Visibility = Visibility.Visible; }
+                    else Info();
+                
+            }
             catch (Exception у) { MessageBox.Show(у.Message + "Ошибка на втором этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }
         }
         private void cb3_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
+            /*try
             {
                 using (var db = new App.PogodaContext())
                 {
@@ -123,6 +166,15 @@ namespace TenkiApp
                     { link = cit.link; }
                     if (city.Count() != 0) Info();
                 }
+            }
+            catch (Exception) { MessageBox.Show("Ошибка на третьем этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }*/
+
+            try
+            {
+                    var city = dbcon.citys.Where(x => x.name == cb3.SelectedItem);
+                    foreach (var cit in city)
+                    { link = cit.link; }
+                    if (city.Count() != 0) Info();
             }
             catch (Exception) { MessageBox.Show("Ошибка на третьем этапе, пожалуйста, передайте это разработчику", "Окошко надежды"); }
         }
