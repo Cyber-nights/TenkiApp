@@ -51,6 +51,11 @@ namespace TenkiApp
                 MainWindow.ShowInTaskbar = true;
                 MainWindow.WindowState = WindowState.Normal;
                 MainWindow.Activate();
+                MainWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                double height = SystemParameters.FullPrimaryScreenHeight;
+                double width = SystemParameters.FullPrimaryScreenWidth;
+                MainWindow.Top = height - MainWindow.Height + 20;
+                MainWindow.Left = width - MainWindow.Width;
             }
         }
         void menuitemexit(object sender, EventArgs e)
@@ -69,6 +74,7 @@ namespace TenkiApp
             protected override void OnConfiguring(DbContextOptionsBuilder optionsbuilder)
             {
                 optionsbuilder.UseSqlite("Data Source=MyProject.sqlite");
+                //optionsbuilder.UseModel(MyCompiledModels.BlogsContextModel.Instance);
             }
 
         }
