@@ -32,8 +32,8 @@ namespace TenkiApp
             WindowStartupLocation = WindowStartupLocation.Manual;
             double height = SystemParameters.FullPrimaryScreenHeight;
             double width = SystemParameters.FullPrimaryScreenWidth;
-            this.Top = height-window1.Height+20;
-            this.Left = width-window1.Width;
+            this.Top = height-window1.Height+13;
+            this.Left = width-window1.Width-10;
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

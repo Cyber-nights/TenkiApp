@@ -54,8 +54,8 @@ namespace TenkiApp
                 MainWindow.WindowStartupLocation = WindowStartupLocation.Manual;
                 double height = SystemParameters.FullPrimaryScreenHeight;
                 double width = SystemParameters.FullPrimaryScreenWidth;
-                MainWindow.Top = height - MainWindow.Height + 20;
-                MainWindow.Left = width - MainWindow.Width;
+                MainWindow.Top = height - MainWindow.Height+13;
+                MainWindow.Left = width - MainWindow.Width-10;
             }
         }
         void menuitemexit(object sender, EventArgs e)

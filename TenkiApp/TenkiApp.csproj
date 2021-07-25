@@ -35,13 +35,15 @@
     <Resource Include="1-10712-128.png" />
     <Resource Include="127.png" />
     <Resource Include="128.png" />
-    <Resource Include="47715-blue-light-fantasy-computer-crescent-file.png" />
+    <Resource Include="47715-blue-light-fantasy-computer-crescent-file.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <EmbeddedResource Include="MyProject.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="refresh.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <Resource Include="refresh.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <EmbeddedResource Include="saveinfo.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
