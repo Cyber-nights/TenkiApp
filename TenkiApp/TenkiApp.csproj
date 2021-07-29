@@ -2,10 +2,20 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>4.8</TargetFramework>
     <UseWPF>true</UseWPF>
 	<UseWindowsForms>true</UseWindowsForms>
+	<StartupObject>TenkiApp.App</StartupObject>
+	<NoWin32Manifest>true</NoWin32Manifest>
+	<ApplicationIcon>dark_moon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Новая папка\**" />
+    <EmbeddedResource Remove="Новая папка\**" />
+    <None Remove="Новая папка\**" />
+    <Page Remove="Новая папка\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="1-10712-128.png" />
@@ -13,7 +23,6 @@
     <None Remove="128.png" />
     <None Remove="47715-blue-light-fantasy-computer-crescent-file.png" />
     <None Remove="MyProject.sqlite" />
-    <None Remove="refresh.ico" />
     <None Remove="refresh.png" />
     <None Remove="saveinfo.txt" />
     <None Remove="tenkidb.sqlite" />
@@ -26,9 +35,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentWPF" Version="0.9.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.34" />
     <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0-preview.6.21352.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.8" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,43 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TenkiApp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Погода" mc:Ignorable="d" Height="440" Width="400" Loaded="Window_Loaded" Closing="Window_Closing" WindowStartupLocation="CenterScreen"
-        x:Name="window1" MouseDown="window1_MouseDown" AllowsTransparency="True" WindowStyle="None" Background="#FFA4F7FF">
-    <TabControl HorizontalAlignment="Left" Height="410" Margin="10,10,0,0" VerticalAlignment="Top" Width="376">
-        <TabItem Header="Погода">
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        Title="TenkiApp" mc:Ignorable="d" Height="440" Width="500" Loaded="Window_Loaded" Closing="Window_Closing"
+        x:Name="window1" MouseDown="window1_MouseDown"  WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+    <Border x:Name="brd" CornerRadius="50" Width="400" Height="440" fw:AcrylicWindow.NoiseOpacity="1" Background="{fw:AcrylicBrush g1}">
+
+
+        <Grid>
+            <Rectangle x:Name="r1" Fill="{fw:AcrylicBrush brd}" Margin="300,300,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="100">
+                
+            </Rectangle>
+            <TabControl HorizontalAlignment="Left" Height="294" Margin="10,10,0,0" VerticalAlignment="Top" Width="376" Opacity="1" Background="DarkGray">
+                <TabItem Header="Погода">
+                    <Grid>
+                        <Button x:Name="brefresh" HorizontalAlignment="Left" Margin="330,17,0,0" VerticalAlignment="Top" Visibility="Visible" Height="30" Padding="0,0,0,0" Width="30" Click="brefresh_Click">
+                            <StackPanel>
+                                <Image Source="\refresh.png" Width="28" Height="28" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Label x:Name="l1" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,11,0,0" VerticalAlignment="Top" Width="auto"/>
+                        <Label x:Name="l2" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,59,0,0" VerticalAlignment="Top" Width="auto"/>
+                        <Label x:Name="l3" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,107,0,0" VerticalAlignment="Top" Width="auto"/>
+                        <Label x:Name="l4" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,155,0,0" VerticalAlignment="Top" Width="auto"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Настройки">
+                    <Grid>
+                        <ComboBox x:Name="cb1" HorizontalAlignment="Left" Margin="26,31,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="cb1_SelectionChanged"/>
+                        <ComboBox x:Name="cb2" HorizontalAlignment="Left" Margin="26,63,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="cb2_SelectionChanged"/>
+                        <ComboBox x:Name="cb3" HorizontalAlignment="Left" Margin="26,93,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="cb3_SelectionChanged"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Тест">
+                    <Grid x:Name="maingrid">
+                        <ListBox x:Name="lbtest" Margin="112,16,516,154"/>
+                        <TextBox x:Name="tbtestlink" Text="" TextWrapping="Wrap" Height="20" Margin="26,233,301,13" />
+                        <Button x:Name="btest" Content="Тест" HorizontalAlignment="Left" Margin="118,301,0,0" VerticalAlignment="Top" Height="28" Width="132" Click="btest_Click_1"/>
+                        <TextBox x:Name="tbtest" Text="" TextWrapping="Wrap" Height="20" Margin="26,258,430,104" />
+                        <Button x:Name="addbd" Content="Заполнить БД" HorizontalAlignment="Left" Margin="133,335,0,0" VerticalAlignment="Top" Height="38" Width="104" Padding="0" Click="addbd_Click"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
             <Grid>
-                <Grid.Background>
-                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
-                </Grid.Background>
-                <Button x:Name="brefresh" HorizontalAlignment="Left" Margin="726,17,0,0" VerticalAlignment="Top" Visibility="Visible" Height="30" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" FlowDirection="RightToLeft" Padding="0,0,0,0" Grid.IsSharedSizeScope="True" Width="30" Click="brefresh_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="\refresh.png" Width="28" Height="28" VerticalAlignment="Center" Stretch="Fill" StretchDirection="Both"/>
-                    </StackPanel>
+                <Button Opacity="1" BorderBrush="Transparent" Background="#01FFFFFF" Padding="0" Margin="52,346,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="40" BorderThickness="1,1,1,1">
+                    Проверка
                 </Button>
-                <Label x:Name="l1" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,11,0,0" VerticalAlignment="Top" Width="auto"/>
-                <Label x:Name="l2" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,59,0,0" VerticalAlignment="Top" Width="auto"/>
-                <Label x:Name="l3" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,107,0,0" VerticalAlignment="Top" Width="auto"/>
-                <Label x:Name="l4" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,155,0,0" VerticalAlignment="Top" Width="auto"/>
             </Grid>
-        </TabItem>
-        <TabItem Header="Настройки" Background="{x:Null}">
-            <Grid>
-                <Grid.Background>
-                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
-                </Grid.Background>
-                <ComboBox x:Name="cb1" HorizontalAlignment="Left" Margin="26,31,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="cb1_SelectionChanged"/>
-                <ComboBox x:Name="cb2" HorizontalAlignment="Left" Margin="26,63,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="cb2_SelectionChanged"/>
-                <ComboBox x:Name="cb3" HorizontalAlignment="Left" Margin="26,93,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="cb3_SelectionChanged"/>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Тест">
-            <Grid x:Name="maingrid" Background="#FFADFFFE">
-                <ListBox x:Name="lbtest" Margin="112,16,516,154"/>
-                <TextBox x:Name="tbtestlink" Text="" TextWrapping="Wrap" Height="20" Margin="26,233,430,129" />
-                <Button x:Name="btest" Content="Тест" HorizontalAlignment="Left" Margin="118,301,0,0" VerticalAlignment="Top" Height="28" Width="132" Click="btest_Click_1"/>
-                <TextBox x:Name="tbtest" Text="" TextWrapping="Wrap" Height="20" Margin="26,258,430,104" />
-                <Button x:Name="addbd" Content="Заполнить БД" HorizontalAlignment="Left" Margin="133,335,0,0" VerticalAlignment="Top" Height="38" Width="104" Padding="0" Click="addbd_Click" Cursor="Hand"/>
-            </Grid>
-        </TabItem>
-    </TabControl>
+        </Grid>
+    </Border>
+
 </Window>
