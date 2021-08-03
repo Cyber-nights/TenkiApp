@@ -21,12 +21,22 @@ namespace TenkiApp
         WInForms.NotifyIcon noti = new WInForms.NotifyIcon();
         WInForms.ContextMenuStrip contextmenu = new WInForms.ContextMenuStrip();
         WInForms.ToolStripMenuItem menuitem = new WInForms.ToolStripMenuItem();
+        WInForms.ToolStripMenuItem menuitem2 = new WInForms.ToolStripMenuItem();
+        WInForms.ToolStripSeparator separator = new WInForms.ToolStripSeparator();
         public App()
         {
-            menuitem.MergeIndex = 0;
+            menuitem.MergeIndex = 1;
             menuitem.Text = "Выход";
             menuitem.Click += menuitemexit;
+
+            menuitem2.MergeIndex = 0;
+            menuitem2.Text = "Меню";
+            menuitem2.Click += mainmenu;
+
+            contextmenu.Items.Add(menuitem2);
+            contextmenu.Items.Add(separator);
             contextmenu.Items.Add(menuitem);
+            
             //contextmenu.Items.AddRange(new WInForms.ContextMenuStrip[]{ menuitem});
             noti.Icon = new Icon(@"refresh.ico");
             noti.DoubleClick += notidouble;
@@ -62,6 +72,23 @@ namespace TenkiApp
         {
             Application.Current.Shutdown();
         }
+
+        void mainmenu(object sender, EventArgs e)
+        {
+            if (MainWindow.WindowState == WindowState.Minimized)
+            {
+                noti.Visible = false;
+                MainWindow.ShowInTaskbar = true;
+                MainWindow.WindowState = WindowState.Normal;
+                MainWindow.Activate();
+                MainWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                double height = SystemParameters.FullPrimaryScreenHeight;
+                double width = SystemParameters.FullPrimaryScreenWidth;
+                MainWindow.Top = height - MainWindow.Height + 13;
+                MainWindow.Left = width - MainWindow.Width - 10;
+            }
+        }
+
         public class PogodaContext : DbContext
         {
             public DbSet<Country> countrys { get; set; }

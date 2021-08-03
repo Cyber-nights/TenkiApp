@@ -22,7 +22,7 @@ namespace TenkiApp
     {
         //App.PogodaContext db = new App.PogodaContext();
         static string save = "saveinfo.txt", savedata = "", link = ""; string[] c = new string[70]; int i = 0;
-        int idcountry, idarea, idcity;
+        int idarea;
         App.PogodaContext dbcon = new App.PogodaContext();
         //FileInfo f = new FileInfo(save);
         StreamReader str = new StreamReader(save);
@@ -230,7 +230,7 @@ namespace TenkiApp
             //w1.Show();
         }
 
-        private void btest_Click_1(object sender, RoutedEventArgs e)
+        /*private void btest_Click_1(object sender, RoutedEventArgs e)
         {
             lbtest.Items.Clear();
             try
@@ -242,7 +242,7 @@ namespace TenkiApp
                 { lbtest.Items.Add(p.InnerText); }
             }
             catch (Exception exp) { MessageBox.Show("Ошибка" + exp.Message, "Не получилось"); }
-        }
+        }*/
 
         private void window1_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -286,6 +286,11 @@ namespace TenkiApp
             //adddatabase();
         }
 
+        private void t1_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        {
+
+        }
+
         public void Info()
         {
             i = 0;
@@ -312,7 +317,7 @@ namespace TenkiApp
                 { i++; if (i == 4) { l4.Content = "Влажность " + h.InnerText; i = 0; break; } }
                 // температура днем //div[@class='temp forecast-briefly__temp forecast-briefly__temp_day']
             }
-            catch (Exception exp)
+            catch (Exception)
             {
                 l1.Content = "Данные не получены";
                 l2.Content = "Данные не получены";

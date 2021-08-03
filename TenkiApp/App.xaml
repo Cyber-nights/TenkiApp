@@ -1,6 +1,7 @@
 ﻿    <Application x:Class="TenkiApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
              xmlns:local="clr-namespace:TenkiApp"
              StartupUri="MainWindow.xaml" Deactivated="Application_Deactivated">
     <Application.Resources>
@@ -11,7 +12,10 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/FluentWPF;component/Styles/Controls.xaml" />
+                <!-- Include the Dragablz Material Design style -->
+                <ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/materialdesign.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MaterialDesignTabablzControlStyle}" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
