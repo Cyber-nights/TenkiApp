@@ -9,11 +9,22 @@
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         Title="TenkiApp" mc:Ignorable="d" Height="440" Width="400" Loaded="Window_Loaded" Closing="Window_Closing"
         x:Name="window1" MouseDown="window1_MouseDown" 
-        WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+        fw:AcrylicWindow.Enabled="True" fw:AcrylicWindow.AcrylicWindowStyle="None" WindowStyle="None" Background="{fw:AcrylicBrush}">
+    <Window.Effect>
+        <BlurEffect Radius="0" KernelType="Gaussian"></BlurEffect>
+    </Window.Effect>
+    <Window.Resources>
+        <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
+            <Setter Property="Background" Value="Black"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected"    Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <Border Background="#FF2B6BAC" CornerRadius="7,7,7,7">
-            
-            <TabControl x:Name="t1" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" FontSize="14" HorizontalAlignment="Left" Height="294" Margin="10,10,0,0" VerticalAlignment="Top" Width="376" Opacity="1" BorderThickness="0,0,0,0">
+        <TabControl x:Name="t1" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" FontSize="14" HorizontalAlignment="Left" Height="294" Margin="10,10,0,0" VerticalAlignment="Top" Width="376" Opacity="1" BorderThickness="0,0,0,0">
             <TabItem Header="Погода" Width="150" Height="33" Background="Gray">
                 <Grid>
                     <Button x:Name="brefresh" HorizontalAlignment="Left" Margin="330,17,0,0" VerticalAlignment="Top" Visibility="Visible" Height="30" Padding="0,0,0,0" Width="30" Click="brefresh_Click">
@@ -72,8 +83,10 @@
                 </Grid>
             </TabItem>-->
         </TabControl>
-        
-        </Border>
-            <Border x:Name="downborder" CornerRadius="0,0,7,7" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Width="auto" Height="63" Background="#FF3A3B51"/>
+        <Grid x:Name="downgrid" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Width="auto" Height="63" Background="{fw:AcrylicBrush}" Margin="0,0,0,0">
+            <Grid.Effect>
+                <BlurEffect KernelType="Gaussian" Radius="20" fw:AcrylicWindow.FallbackColor="White"></BlurEffect>
+            </Grid.Effect>
+        </Grid>
     </Grid>
 </Window>
