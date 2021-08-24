@@ -9,36 +9,8 @@
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         Title="TenkiApp" mc:Ignorable="d" Height="440" Width="400" Loaded="Window_Loaded" Closing="Window_Closing"
         x:Name="window1" MouseDown="window1_MouseDown" 
-        fw:AcrylicWindow.Enabled="True" fw:AcrylicWindow.AcrylicWindowStyle="None" WindowStyle="None" Background="{fw:AcrylicBrush}">
-    <Window.Effect>
-        <BlurEffect Radius="0" KernelType="Gaussian"></BlurEffect>
-    </Window.Effect>
-    <Window.Resources>
-        <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
-            <Setter Property="Background" Value="Black"/>
-            <Style.Triggers>
-                <Trigger Property="IsSelected"    Value="True">
-                    <Setter Property="Background" Value="Red"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent">
     <Grid>
-        <TabControl x:Name="t1" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" FontSize="14" HorizontalAlignment="Left" Height="294" Margin="10,10,0,0" VerticalAlignment="Top" Width="376" Opacity="1" BorderThickness="0,0,0,0">
-            <TabItem Header="Погода" Width="150" Height="33" Background="Gray">
-                <Grid>
-                    <Button x:Name="brefresh" HorizontalAlignment="Left" Margin="330,17,0,0" VerticalAlignment="Top" Visibility="Visible" Height="30" Padding="0,0,0,0" Width="30" Click="brefresh_Click">
-                        <StackPanel>
-                            <Image Source="\refresh.png" Width="28" Height="28" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
-                    <Grid>
-                        <Rectangle Height="25" Width="180" Fill="DarkGray" RadiusY="7" RadiusX="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,11,0,0">
-                            <Rectangle.Effect>
-                                <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
-                            </Rectangle.Effect>
-                        </Rectangle>
-                        <Label x:Name="l1" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,11,0,0" VerticalAlignment="Top" Width="auto"/>
         <Border Background="#FF2B6BAC" CornerRadius="7,7,7,7">
 
             <TabControl x:Name="t1" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" FontSize="14" HorizontalAlignment="Left" Height="294" Margin="10,10,0,0" VerticalAlignment="Top" Width="376" Opacity="1" BorderThickness="0,0,0,0">
@@ -99,12 +71,6 @@
                     <Button x:Name="addbd" Content="Заполнить БД" HorizontalAlignment="Left" Margin="133,335,0,0" VerticalAlignment="Top" Height="38" Width="104" Padding="0" Click="addbd_Click"/>
                 </Grid>
             </TabItem>-->
-        </TabControl>
-        <Grid x:Name="downgrid" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Width="auto" Height="63" Background="{fw:AcrylicBrush}" Margin="0,0,0,0">
-            <Grid.Effect>
-                <BlurEffect KernelType="Gaussian" Radius="20" fw:AcrylicWindow.FallbackColor="White"></BlurEffect>
-            </Grid.Effect>
-        </Grid>
             </TabControl>
 
         </Border>
