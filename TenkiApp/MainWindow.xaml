@@ -39,41 +39,58 @@
                             </Rectangle.Effect>
                         </Rectangle>
                         <Label x:Name="l1" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,11,0,0" VerticalAlignment="Top" Width="auto"/>
+        <Border Background="#FF2B6BAC" CornerRadius="7,7,7,7">
 
+            <TabControl x:Name="t1" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" FontSize="14" HorizontalAlignment="Left" Height="294" Margin="10,10,0,0" VerticalAlignment="Top" Width="376" Opacity="1" BorderThickness="0,0,0,0">
+                <TabItem Header="Погода" Width="150" Height="33" Background="Gray">
+                    <Grid>
+                        <Button x:Name="brefresh" HorizontalAlignment="Left" Margin="330,17,0,0" VerticalAlignment="Top" Visibility="Visible" Height="30" Padding="0,0,0,0" Width="30" Click="brefresh_Click">
+                            <StackPanel>
+                                <Image Source="\refresh.png" Width="28" Height="28" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Grid>
+                            <Rectangle Height="25" Width="180" Fill="DarkGray" RadiusY="7" RadiusX="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,11,0,0">
+                                <Rectangle.Effect>
+                                    <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
+                                </Rectangle.Effect>
+                            </Rectangle>
+                            <Label x:Name="l1" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,11,0,0" VerticalAlignment="Top" Width="auto"/>
+
+                        </Grid>
+                        <Rectangle Height="25" Width="180" Fill="DarkGray" RadiusY="7" RadiusX="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,59,0,0">
+                            <Rectangle.Effect>
+                                <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
+                            </Rectangle.Effect>
+                        </Rectangle>
+                        <Label x:Name="l2" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,59,0,0" VerticalAlignment="Top" Width="auto"/>
+                        <Rectangle Height="25" Width="180" Fill="DarkGray" RadiusY="7" RadiusX="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,107,0,0">
+                            <Rectangle.Effect>
+                                <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
+                            </Rectangle.Effect>
+                        </Rectangle>
+                        <Label x:Name="l3" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,107,0,0" VerticalAlignment="Top" Width="auto"/>
+                        <Rectangle Height="25" Width="180" Fill="DarkGray" RadiusY="7" RadiusX="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,155,0,0">
+                            <Rectangle.Effect>
+                                <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
+                            </Rectangle.Effect>
+                        </Rectangle>
+                        <Label x:Name="l4" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,155,0,0" VerticalAlignment="Top" Width="auto"/>
                     </Grid>
-                    <Rectangle Height="25" Width="180" Fill="DarkGray" RadiusY="7" RadiusX="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,59,0,0">
-                        <Rectangle.Effect>
-                            <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
-                    <Label x:Name="l2" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,59,0,0" VerticalAlignment="Top" Width="auto"/>
-                    <Rectangle Height="25" Width="180" Fill="DarkGray" RadiusY="7" RadiusX="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,107,0,0">
-                        <Rectangle.Effect>
-                            <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
-                    <Label x:Name="l3" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,107,0,0" VerticalAlignment="Top" Width="auto"/>
-                    <Rectangle Height="25" Width="180" Fill="DarkGray" RadiusY="7" RadiusX="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,155,0,0">
-                        <Rectangle.Effect>
-                            <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
-                    <Label x:Name="l4" Content="" HorizontalAlignment="Left" Height="auto" Margin="24,155,0,0" VerticalAlignment="Top" Width="auto"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Настройки" Width="150" Height="33" Background="Gray">
-                <Grid>
-                    <Rectangle Height="100" Width="250" Fill="DarkGray" RadiusY="7" RadiusX="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,31,0,0">
-                        <Rectangle.Effect>
-                            <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
-                    <ComboBox x:Name="cb1" HorizontalAlignment="Left" Margin="26,31,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="cb1_SelectionChanged"/>
-                    <ComboBox x:Name="cb2" HorizontalAlignment="Left" Margin="26,63,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="cb2_SelectionChanged"/>
-                    <ComboBox x:Name="cb3" HorizontalAlignment="Left" Margin="26,93,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="cb3_SelectionChanged"/>
-                </Grid>
-            </TabItem>
-            <!--<TabItem Header="Тест">
+                </TabItem>
+                <TabItem Header="Настройки" Width="150" Height="33" Background="Gray">
+                    <Grid>
+                        <Rectangle Height="100" Width="250" Fill="DarkGray" RadiusY="7" RadiusX="7" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,31,0,0">
+                            <Rectangle.Effect>
+                                <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" RenderingBias="Quality" ShadowDepth="1"/>
+                            </Rectangle.Effect>
+                        </Rectangle>
+                        <ComboBox x:Name="cb1" HorizontalAlignment="Left" Margin="26,31,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="cb1_SelectionChanged"/>
+                        <ComboBox x:Name="cb2" HorizontalAlignment="Left" Margin="26,63,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="cb2_SelectionChanged"/>
+                        <ComboBox x:Name="cb3" HorizontalAlignment="Left" Margin="26,93,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="cb3_SelectionChanged"/>
+                    </Grid>
+                </TabItem>
+                <!--<TabItem Header="Тест">
                 <Grid x:Name="maingrid">
                     <ListBox x:Name="lbtest" Margin="112,16,516,154"/>
                     <TextBox x:Name="tbtestlink" Text="" TextWrapping="Wrap" Height="20" Margin="26,233,301,13" />
@@ -88,5 +105,13 @@
                 <BlurEffect KernelType="Gaussian" Radius="20" fw:AcrylicWindow.FallbackColor="White"></BlurEffect>
             </Grid.Effect>
         </Grid>
+            </TabControl>
+
+        </Border>
+        <Border x:Name="downborder" CornerRadius="0,0,7,7" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Width="auto" Height="63" Background="#FF3A3B51">
+            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="Power" Width="33" Height="33" Margin="33" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
