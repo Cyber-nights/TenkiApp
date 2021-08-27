@@ -75,9 +75,13 @@
 
         </Border>
         <Border x:Name="downborder" CornerRadius="0,0,7,7" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Width="auto" Height="63" Background="#FF3A3B51">
-            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                <materialDesign:PackIcon Kind="Power" Width="33" Height="33" Margin="33" VerticalAlignment="Center"/>
-            </StackPanel>
+            <ListView x:Name="lw1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="#FF1368BD">
+                <ListViewItem Height="63" Width="auto" Margin="0,0,0,0" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Center" Selected="ListViewItem_Selected">
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20">
+                        <materialDesign:PackIcon Kind="Power" Width="33" Height="33" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
         </Border>
     </Grid>
 </Window>

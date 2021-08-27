@@ -291,6 +291,11 @@ namespace TenkiApp
 
         }
 
+        private void ListViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
         public void Info()
         {
             i = 0;
